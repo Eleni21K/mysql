@@ -1,0 +1,172 @@
+CREATE DATABASE a1;
+use a1;
+
+
+CREATE TABLE katasthma( 
+poli VARCHAR(25) DEFAULT  'unknown' NOT NULL, 
+odos VARCHAR(25) DEFAULT 'unknown' NOT NULL, 
+arithmos INT(3) NOT NULL, 
+tk VARCHAR(5) NOT NULL, 
+imerominia DATE NOT NULL, 
+kwdikos INT(2) NOT NULL AUTO_INCREMENT, 
+PRIMARY KEY(kwdikos) 
+) ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE thlefwno( 
+thl VARCHAR(10) DEFAULT 'Thl' NOT NULL, 
+katasthma_thl INT(2) NOT NULL, 
+PRIMARY KEY(thl, katasthma_thl), 
+CONSTRAINT TLF 
+FOREIGN KEY(katasthma_thl) REFERENCES katasthma(kwdikos) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE upallhlos(	 
+on_ep VARCHAR(50) DEFAULT 'unknown' NOT NULL, 
+email VARCHAR(35) NOT NULL, 
+viografiko TEXT, 
+fulo ENUM('Antras','Gunaika') NOT NULL, 
+afm INT(9) NOT NULL, 
+kwdikos_katasthmatos INT(2) NOT NULL, 
+PRIMARY KEY(afm), 
+UNIQUE(email), 
+CONSTRAINT SUPERVISED 
+FOREIGN KEY (kwdikos_katasthmatos) REFERENCES katasthma(kwdikos) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE sudelestes ( 
+on_epwn  VARCHAR(50) DEFAULT 'unknown' NOT NULL, 
+etos_gen YEAR(4) NOT NULL, 
+xwra VARCHAR(30) NOT NULL, 
+id INT(3) NOT NULL, 
+PRIMARY KEY(id) 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE skhnotheths( 
+debuto YEAR(4) NOT NULL, 
+titlos_tainias VARCHAR(50) NOT NULL, 
+id INT(3) NOT NULL, 
+PRIMARY KEY(id), 
+CONSTRAINT DIRECTOR 
+FOREIGN KEY(id) REFERENCES sudelestes(id) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE hthopoios( 
+upsos FLOAT(3,2) NOT NULL, 
+gnwrisma VARCHAR(50) NOT NULL, 
+id INT(3) NOT NULL, 
+PRIMARY KEY(id), 
+CONSTRAINT ACTOR 
+FOREIGN KEY(id) REFERENCES sudelestes(id) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+
+CREATE TABLE tainia( 
+title VARCHAR(100) DEFAULT 'unknown' NOT NULL, 
+xwra_proel VARCHAR(50) DEFAULT 'unknown' NOT NULL, 
+etos_kuklof YEAR(4) NOT NULL, 
+oscars ENUM('nai', 'oxi') NOT NULL, 
+perigrafi TEXT, 
+kwdiko INT(7) NOT NULL AUTO_INCREMENT, 
+kwdikos_skhnotheth INT(3) NOT NULL, 
+PRIMARY KEY(kwdiko), 
+CONSTRAINT MOVIE 
+FOREIGN KEY (kwdikos_skhnotheth) REFERENCES skhnotheths(id) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE  diathrhsh( 
+kwdikos_katasthmatos   INT(2)  NOT   NULL, 
+kwdikos_tainias  INT(7)  NOT  NULL, 
+PRIMARY  KEY(kwdikos_katasthmatos,kwdikos_tainias), 
+CONSTRAINT CRSDIATHRHSH 
+FOREIGN  KEY (kwdikos_katasthmatos) REFERENCES katasthma(kwdikos) 
+ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT STDNTDIATHRHSH 
+FOREIGN KEY (kwdikos_tainias) REFERENCES tainia(kwdiko) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+
+CREATE  TABLE sudelestes_tainias( 
+kwdikos_tainias INT(7) NOT NULL, 
+kwdikos_sudelesth INT(3) NOT NULL, 
+PRIMARY KEY(kwdikos_tainias, kwdikos_sudelesth), 
+CONSTRAINT CRSSUDELESTES_TAINIAS 
+FOREIGN KEY (kwdikos_tainias) REFERENCES tainia(kwdiko) 
+ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT STDNTSUDELESTES_TAINIAS 
+FOREIGN KEY (kwdikos_sudelesth) REFERENCES sudelestes(id) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+
+CREATE TABLE summetoxh( 
+id_hthopoiou INT(3) NOT NULL, 
+id_tainias INT(7) NOT NULL, 
+PRIMARY KEY(id_hthopoiou,id_tainias), 
+CONSTRAINT CRSSUMMETOXH 
+FOREIGN KEY(id_hthopoiou) REFERENCES hthopoios(id) 
+ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT STDNTSUMMETOXH 
+FOREIGN KEY(id_tainias) REFERENCES tainia(kwdiko) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE kathgoria( 
+onoma VARCHAR(100) DEFAULT 'unknown'  NOT NULL, 
+id INT(3) NOT NULL, 
+id_kathgorias INT(3), 
+PRIMARY KEY(id), 
+CONSTRAINT CATEGORY 
+FOREIGN KEY(id_kathgorias) REFERENCES kathgoria(id) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE belongs( 
+id INT(3) NOT NULL, 
+kwdikos_tainias INT(7) NOT NULL,   
+PRIMARY KEY(id,kwdikos_tainias), 
+CONSTRAINT CRSBELONGS 
+FOREIGN KEY(id) REFERENCES kathgoria(id) 
+ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT STDNTBELONGS 
+FOREIGN KEY(kwdikos_tainias) REFERENCES tainia(kwdiko) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE adigrafo( 
+eidos ENUM('dvd','blu-ray') NOT NULL, 
+code INT(2) NOT NULL, 
+kwdikos_tainias INT(7) NOT NULL, 
+PRIMARY KEY(code,kwdikos_tainias), 
+CONSTRAINT CRSADIGRAFO 
+FOREIGN KEY(kwdikos_tainias) REFERENCES tainia(kwdiko) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+CREATE TABLE pelates( 
+on_epwn VARCHAR(50) DEFAULT 'unknown' NOT NULL, 
+thl VARCHAR(10) NOT NULL, 
+hmer_eggrafhs DATE NOT NULL, 
+PRIMARY KEY(on_epwn,thl) 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+
+
+CREATE TABLE enoikiash( 
+hmer_enoikiashs DATE NOT NULL, 
+hmer_epistrofhs DATE NOT NULL, 
+enoikiasths VARCHAR(50) DEFAULT 'unknown' NOT NULL, 
+copy INT(2) NOT NULL, 
+PRIMARY KEY(enoikiasths,copy), 
+CONSTRAINT CRSENOIKIASH 
+FOREIGN KEY(enoikiasths) REFERENCES pelates(on_epwn) 
+ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT STDNTENOIKIASH 
+FOREIGN KEY(copy) REFERENCES adigrafo(code) 
+ON DELETE CASCADE ON UPDATE CASCADE 
+)ENGINE = InnoDB CHARACTER SET greek COLLATE greek_general_ci; 
+

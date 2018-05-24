@@ -1,0 +1,85 @@
+
+INSERT INTO  katasthma VALUES 
+('Athina', 'Anaksagora',2,'56600',2004-01-01,12), 
+('Patra','Kolokotrwnh',47,'27800','2007-04-03',15), 
+('Chania','Mhlou',21,'12300','2011-06-15',17); 
+
+INSERT INTO thlefwno VALUES 
+('2108750136',12), 
+('2610871209',15), 
+('2185098765',17); 
+
+INSERT INTO upallhlos VALUES 
+('Kwstas Papagewrgiou','kpapag@gmail.com','viografiko1','Antras','765478340',12), 
+('Oresths Loukas','oreslouk@gmail.com','viografiko2','Antras','372910673',15), 
+('Antwnia Peristerakh','antwniaper@gmail.com','viografiko3','Gunaika','639260184',17); 
+
+INSERT INTO sudelestes VALUES 
+('Johnny Depp','1963','USA',511), 
+('Lasse Hallstrom','1946','Sweden',911), 
+('Bradley Cooper','1975','USA',521), 
+('David O.Russel','1958','USA',921), 
+('Macaulay Culkin','1980','USA',531), 
+('Chris Columbus','1958','USA',931); 
+
+INSERT INTO skhnotheths VALUES 
+('1987','Tainia1',911), 
+('1981','Tainia2',921), 
+('1987','Tainia3',931); 
+
+INSERT INTO hthopoios VALUES 
+(1.78,'gnwrisma1',511), 
+(1.80,'gnwrisma2',521), 
+(1.83,'gnwrisma3',531); 
+
+
+INSERT INTO tainia VALUES 
+('Chocolat','UK-USA','2000','oxi','perigrafh1',5678901,911), 
+('Silver Linings Playbook','USA','2012','nai','perigrafh2',6789012,921), 
+('Home Alone','USA','1990','oxi','perigrafh3',7890123,931); 
+
+INSERT INTO diathrhsh VALUES 
+(12,5678901), 
+(15,6789012), 
+(17,7890123); 
+
+INSERT INTO sudelestes_tainias VALUES 
+(5678901,511), 
+(6789012,521), 
+(7890123,531), 
+(5678901,911), 
+(6789012,921), 
+(7890123,931); 
+
+
+INSERT INTO summetoxh VALUES 
+(511,5678901), 
+(521,6789012), 
+(531,7890123); 
+
+INSERT INTO kathgoria VALUES 
+('comedy',444,444), 
+('thriller',446,446), 
+('action',448,448); 
+
+INSERT INTO belongs VALUES 
+(448, 5678901), 
+(444, 6789012), 
+(444, 7890123); 
+
+INSERT INTO adigrafo VALUES 
+('dvd',1,5678901), 
+('blu-ray',2, 6789012), 
+('dvd',5,7890123); 
+
+INSERT INTO pelates VALUES 
+('Anna Sykes','6987654321','2010-06-02'), 
+('Tom Hiddle','6991462860','2012-05-20'), 
+('Martin Cumber','6948765009','2010-07-01'); 
+
+INSERT INTO enoikiash VALUES 
+('2013-12-27','2013-12-31','Anna Sykes',1), 
+('2013-12-31','2014-01-03','Tom Hiddle',2), 
+('2014-01-02','2014-01-05','Martin Cumber',5); 
+
+

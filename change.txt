@@ -1,0 +1,20 @@
+UPDATE sudelestes SET on_epwn='Henry Cavill',etos_gen='1983', xwra='Britain', id=541
+WHERE on_epwn='Bradley Cooper';
+
+UPDATE katasthma SET poli='Thessalonikh',odos='Karlomagnou',arithmos=27,tk='65900',imerominia='2011-03-01',kwdikos=19
+WHERE poli='Athina';
+
+UPDATE pelates SET on_epwn='Kalliopi Kana',thl='6947327909',hmer_eggrafhs='2011-09-25'
+WHERE on_epwn='Anna Sykes';
+
+DELETE FROM tainia
+WHERE oscars='nai';
+
+DELETE FROM hthopoios
+WHERE upsos=1.83;
+
+DELETE FROM upallhlos
+WHERE fulo='Gunaika';
+
+ALTER TABLE tainia DROP perigrafi;
+ALTER TABLE tainia ADD diarkeia INT(4) NOT NULL;
